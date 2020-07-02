@@ -1,0 +1,81 @@
+@import 'constants';
+@import 'hamburger';
+
+ul, li {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+input, textarea, div, span {
+  outline: 0;
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  background-color: $white;
+  font-size: $medium-size;
+  line-height: 24px;
+}
+
+.banner-button {
+  button {
+    background-color: $primary-color;
+    width: 210px;
+    height: 38px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #fefefe;
+    transition: all 0.5s ease-out;
+  }
+  button:hover {
+    background-color: #b83535;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.text-title {
+  font-size: $biggest-size;
+  line-height: 54px;
+  text-align: center;
+}
+
+.form-group {
+  .form-control {
+    background: none;
+  }
+  &.has-error {
+    span.has-error {
+      color: #f44;
+      font-size: 13px;
+    }
+  }
+}
+
+.form-control.underlined {
+  &:focus {
+    border: 1px solid #52bcd3;
+  }
+}
+.has-error .form-control.underlined:focus {
+  border: 1px solid #52bcd3;
+}
+.has-error .form-control.underlined {
+  border-color: #f44;
+}
+
+.form-control.boxed {
+  &:focus {
+    border: 1px solid #52bcd3;
+  }
+}
+

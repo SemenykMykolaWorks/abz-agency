@@ -1,0 +1,231 @@
+<header class="header">
+  <div class="header-logo">
+    <img src="./assets/logo.svg" alt="logo">
+  </div>
+  <div class="header-menu">
+
+    <ul>
+      <li *ngFor="let menu of menuItem">
+        <a href="{{'#' + menu.id}}"
+           (click)="secondaryColor($event)"
+           [className]="activeItemMenu === menu.name ? 'secondary-color' : ''"
+        >{{ menu.name }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="menu" [ngClass]="toggleMenu ? 'menu_state_open' : ''">
+    <div class="menu-icon"
+         [ngClass]="toggleMenu ? 'left-position' : ''"
+         (click)="changeStateMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="menu-links">
+      <div class="menu-links_box">
+        <div class="header-logo">
+          <img src="./assets/logo.svg" alt="logo">
+        </div>
+        <a *ngFor="let menu of menuItem"
+           class="menu-links_box__item"
+           href="{{'#' + menu.id}}"
+           (click)="secondaryColor($event)"
+           [className]="activeItemMenu === menu.name ? 'secondary-color' : ''"
+        >{{ menu.name }}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="banner">
+  <div class="banner-title">
+    Test assignment <br>
+    for Frontend <br>
+    Developer position
+  </div>
+  <div class="banner-text">
+    We kindly remind you that your test assignment should be submitted as a link to github/bitbucket repository.
+    <span>Please be patient, we consider and respond to every application that meets minimum requirements.
+    We look forward to your submission. Good luck! The photo has to scale in the banner area on the different screens</span>
+  </div>
+  <div class="banner-button">
+    <a href="#login"><button>Sing up now</button></a>
+  </div>
+</div>
+
+<div id="requirement">
+
+  <div class="requirement-title text-title">Let's get acquainted</div>
+
+  <div class="requirement-inner">
+    <div class="requirement-inner_icon">
+      <img src="./assets/layer.png" alt="requirement-icon">
+    </div>
+    <div class="requirement-inner_text">
+      <div class="requirement-inner_text__box">
+        <p>I am cool frontend developer</p>
+        <p>We will evaluate how clean your approach to writing CSS and Javascript code is.
+          You can use any CSS and Javascript 3rd party libraries without any restriction.</p>
+        <p>If 3rd party css/javascript libraries are added to the project via bower/npm/yarn you will get bonus points.
+          If you use any task runner (gulp/webpack) you will get bonus points as well.
+          Slice service directory page P​SD mockup​ into HTML5/CSS3. </p>
+      </div>
+      <a href="#login"><strong>Sing up now</strong></a>
+    </div>
+  </div>
+</div>
+
+<div id="users">
+  <div class="users-text">
+    <div class="users-text_title text-title">Our cheerful users</div>
+    <div class="users-text_subtitle">Attention! Sorting users by registration date</div>
+  </div>
+
+  <div class="users">
+    <div class="container">
+      <div class="row">
+        <div class="center col-lg-4 col-md-4 col-sm-12 col-12"
+             *ngFor="let user of userGlobalInfo"
+        >
+          <div class="users-box">
+            <div class="users-box_img" *ngIf="user.photo !== null">
+              <img src="{{ user.photo }}" alt="{{ user.photo }}">
+            </div>
+            <div class="users-box_img" *ngIf="user.photo === null">
+              <img src="./assets/photo-cover.jpg" alt="{{ user.photo }}">
+            </div>
+            <div appOverflowTooltip
+                 [tooltip]="user.name"
+                 class="users-box_name">{{ user.name }}</div>
+            <div class="users-box_position">{{ user.position }}</div>
+            <div appOverflowTooltip
+                 [tooltip]="user.email"
+                 class="users-box_email">{{ user.email }}</div>
+            <div class="users-box_tel">{{ user.phone }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="users-button banner-button">
+    <button
+      [disabled]="isDisabled"
+      [ngClass]="{'disabled': isDisabled}"
+      (click)="getUsers()"
+    >Show more
+    </button>
+  </div>
+</div>
+
+<div id="login">
+  <div class="login-text">
+    <div class="login-text_title text-title">Register to get a work</div>
+    <div class="login-text_subtitle">Attention! After successful registration and alert, update the <br> list of
+      users in the block from the top</div>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="form-group"
+         [ngClass]="{'has-error': registerForm.get('name').invalid && registerForm.get('name').touched}">
+      <label for="name">Name</label>
+      <input type="text"
+             class="form-control underlined"
+             id="name"
+             minlength="2"
+             placeholder="Your name"
+             formControlName="name">
+      <span class="form-help-text"
+            *ngIf="registerForm.get('name').invalid && registerForm.get('name').touched">
+        Name cannot be empty and less than 2 characters.
+      </span>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': registerForm.get('email').invalid && registerForm.get('email').touched}">
+      <label for="email">Email</label>
+      <input type="text"
+             class="form-control underlined"
+             id="email"
+             placeholder="Your email"
+             formControlName="email">
+      <span class="form-help-text"
+            *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+      <span *ngIf="registerForm.get('email')['errors']['required']">Email cannot be empty. </span>
+      <span *ngIf="registerForm.get('email')['errors']['email']">Please enter a valid email. </span>
+    </span>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': registerForm.get('phone').invalid && registerForm.get('phone').touched}">
+      <label for="phone">Phone number</label>
+      <input type="number"
+             class="form-control underlined"
+             id="phone"
+             pattern="^[\+]{0,1}380([0-9]{9})$"
+             placeholder="+380 XX XXX XX XX"
+             formControlName="phone">
+      <span class="form-help-text_format">Еnter phone number in open format</span>
+      <span class="form-help-text"
+            *ngIf="registerForm.get('phone').invalid && registerForm.get('phone').touched">
+        <span *ngIf="registerForm.get('phone')['errors']['required']">Phone cannot be empty. </span>
+      </span>
+    </div>
+
+    <div class="form-group login-position"
+         [ngClass]="{'has-error': registerForm.get('position').invalid && registerForm.get('position').touched}">
+      <span class="login-position_title">Select your position</span>
+      <label
+        for="{{ position.id }}"
+        *ngFor="let position of positionsInfo"
+        class="login-position_radio"
+      >
+        <input class="radio"
+               id="{{ position.id }}"
+               type="radio"
+               value="{{ position.id }}"
+               formControlName="position">
+        <span>{{ position.name }}</span>
+      </label>
+    </div>
+    <div class="form-group login-file">
+      <span class="login-file_title">Photo</span>
+      <input class="login-file_input"
+             id="fileInput"
+             name="file"
+             type="file"
+             multiple
+             placeholder="Upload your photo"
+             formControlName="file"
+             (change)="fileNameInput($event)"
+      >
+      <label for="fileInput" class="login-file_label">
+        <span appOverflowTooltip
+              [tooltip]="fileName"
+              class="login-file_label__text">{{ fileName }}</span>
+        <span class="login-file_label__select">Browse</span>
+      </label>
+    </div>
+    <div class="login-button banner-button">
+      <span class="login-button_error">{{ errorMessage }}</span>
+      <button type="submit"
+              [disabled]="registerForm.invalid || isLogin"
+              [ngClass]="{'disabled': registerForm.invalid || isLogin}">
+        Sing up now
+      </button>
+    </div>
+  </form>
+</div>
+
+<footer id="footer">
+  <div class="footer-line"></div>
+  <div class="footer-text">
+    © abz.agency specially for the test task
+  </div>
+</footer>
+
+<div class="app-popup" *ngIf="togglePopup">
+  <app-popup (changeClose)="closePopup()"></app-popup>
+</div>

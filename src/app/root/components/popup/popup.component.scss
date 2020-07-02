@@ -1,0 +1,30 @@
+.popup {
+  width: 375px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  .popup-title {
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px 0 15px;
+    .popup-title_close {
+      cursor: pointer;
+    }
+    .popup-title_close:after {
+      content: "\f00d";
+      font-family: FontAwesome;
+      color: #b2b9c0;
+      font-size: 16px;
+    }
+  }
+  .popup-message {
+    text-align: center;
+  }
+  .popup-button {
+    text-align: end;
+    padding: 0 15px 10px 0;
+    button {
+      width: 85px;
+    }
+  }
+}

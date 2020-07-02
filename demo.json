@@ -1,0 +1,17 @@
+{
+  "/api/v1/token": {
+    "target": "https://frontend-test-assignment-api.abz.agency",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/users": {
+    "target": "https://frontend-test-assignment-api.abz.agency",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/positions": {
+    "target": "https://frontend-test-assignment-api.abz.agency",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
